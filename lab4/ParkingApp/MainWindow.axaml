@@ -1,0 +1,50 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ParkingApp"
+        xmlns:dgx="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
+        x:Class="ParkingApp.MainWindow"
+        Title="Автостоянка" Width="900" Height="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid RowDefinitions="Auto,220,Auto,Auto,*,Auto" Margin="12">
+
+        <TextBlock Grid.Row="0" Text="Автомобили" FontSize="15" FontWeight="Bold" Margin="0,0,0,4"/>
+
+        <dgx:DataGrid Grid.Row="1" Name="CarsGrid"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionChanged="CarsGrid_SelectionChanged"
+                      x:DataType="local:Car">
+            <dgx:DataGrid.Columns>
+                <dgx:DataGridTextColumn Header="Гос. номер" Binding="{Binding License_Plate}" Width="160"/>
+                <dgx:DataGridTextColumn Header="Тип авто"   Binding="{Binding Car_Type}"       Width="160"/>
+                <dgx:DataGridTextColumn Header="№ клиента"  Binding="{Binding Client_ID}"      Width="*"/>
+            </dgx:DataGrid.Columns>
+        </dgx:DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,6,0,12" Spacing="6">
+            <Button Content="Добавить" Click="AddCar_Click"/>
+            <Button Content="Изменить" Click="EditCar_Click"/>
+            <Button Content="Удалить"  Click="DeleteCar_Click"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" Text="Платежи выбранного автомобиля" FontSize="15" FontWeight="Bold" Margin="0,0,0,4"/>
+
+        <dgx:DataGrid Grid.Row="4" Name="PaymentsGrid"
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      x:DataType="local:Payment">
+            <dgx:DataGrid.Columns>
+                <dgx:DataGridTextColumn Header="ID"          Binding="{Binding Entry_ID}"      Width="60"/>
+                <dgx:DataGridTextColumn Header="Гос. номер"  Binding="{Binding License_Plate}" Width="150"/>
+                <dgx:DataGridTextColumn Header="Дата"        Binding="{Binding Work_Date}"     Width="110"/>
+                <dgx:DataGridTextColumn Header="Время"       Binding="{Binding Entry_Time}"    Width="80"/>
+                <dgx:DataGridTextColumn Header="Тип"         Binding="{Binding Entry_Type}"    Width="*"/>
+            </dgx:DataGrid.Columns>
+        </dgx:DataGrid>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,6,0,0" Spacing="6">
+            <Button Content="Добавить платёж" Click="AddPayment_Click"/>
+            <Button Content="Удалить платёж"  Click="DeletePayment_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
