@@ -131,9 +131,17 @@ public partial class MainWindow : Window
 
         using var conn = OpenDb();
         var cmd = conn.CreateCommand();
-        cmd.CommandText = "DELETE FROM Cars WHERE License_Plate = $plate";
+
+        cmd.CommandText = "DELETE FROM Payments WHERE License_Plate = $plate";
         cmd.Parameters.AddWithValue("$plate", car.License_Plate);
         cmd.ExecuteNonQuery();
+
+        cmd.CommandText = "DELETE FROM Parking_Access WHERE License_Plate = $plate";
+        cmd.ExecuteNonQuery();
+
+        cmd.CommandText = "DELETE FROM Cars WHERE License_Plate = $plate";
+        cmd.ExecuteNonQuery();
+
         _payments.Clear();
         LoadCars();
     }
