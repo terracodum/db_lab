@@ -47,8 +47,8 @@ public partial class MainWindow : Window
             {
                 "payments" => BuildPaymentsReport(filterValue),
                 "noaccess" => BuildNoAccessReport(),
-                "summary"  => BuildSummaryReport(),
-                _          => throw new Exception("Неизвестный отчёт")
+                "summary" => BuildSummaryReport(),
+                _ => throw new Exception("Неизвестный отчёт")
             };
 
             string outPath = Path.Combine(Path.GetTempPath(), $"parking_{reportTag}.html");
@@ -77,8 +77,7 @@ public partial class MainWindow : Window
         conn.Open();
         var cmd = conn.CreateCommand();
         cmd.CommandText = """
-            SELECT p.Entry_ID, p.License_Plate, c.Car_Type, c.Client_ID,
-                   p.Work_Date, p.Entry_Time, p.Entry_Type
+            SELECT p.Entry_ID, p.License_Plate, c.Car_Type, c.Client_ID, p.Work_Date, p.Entry_Time, p.Entry_Type
             FROM Payments p
             JOIN Cars c ON p.License_Plate = c.License_Plate
             WHERE $f = 'All' OR p.Entry_Type = $f
