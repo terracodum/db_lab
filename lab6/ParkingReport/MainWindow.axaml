@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ParkingReport.MainWindow"
+        Title="Отчёты — Автостоянка"
+        Width="520" Height="340"
+        CanResize="False">
+
+  <Window.Styles>
+    <Style Selector="TextBlock.label">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="FontSize" Value="14"/>
+    </Style>
+  </Window.Styles>
+
+  <Grid Margin="24" RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,*,Auto">
+
+    <!-- Заголовок -->
+    <TextBlock Grid.Row="0" FontSize="18" FontWeight="Bold"
+               Text="Генератор отчётов"/>
+
+    <!-- Выбор отчёта -->
+    <Grid Grid.Row="2" ColumnDefinitions="140,*">
+      <TextBlock Classes="label" Text="Отчёт:"/>
+      <ComboBox Grid.Column="1" Name="ReportCombo" Width="300" HorizontalAlignment="Left">
+        <ComboBoxItem Content="Въезды (Payments)" Tag="payments"/>
+        <ComboBoxItem Content="Машины без допуска" Tag="noaccess"/>
+        <ComboBoxItem Content="Сводка по типам авто" Tag="summary"/>
+      </ComboBox>
+    </Grid>
+
+    <!-- Параметр фильтра -->
+    <Grid Grid.Row="4" ColumnDefinitions="140,*">
+      <TextBlock Classes="label" Name="FilterLabel" Text="Тип въезда:"/>
+      <ComboBox Grid.Column="1" Name="FilterCombo" Width="300" HorizontalAlignment="Left">
+        <ComboBoxItem Content="Все" Tag="All"/>
+        <ComboBoxItem Content="Single" Tag="Single"/>
+        <ComboBoxItem Content="Subscription" Tag="Subscription"/>
+      </ComboBox>
+    </Grid>
+
+    <!-- Разделитель -->
+    <Separator Grid.Row="6"/>
+
+    <!-- Статус -->
+    <TextBlock Grid.Row="7" Name="StatusText" FontSize="13"
+               Foreground="Gray" VerticalAlignment="Center"
+               Text="Выберите отчёт и нажмите «Сформировать»"/>
+
+    <!-- Кнопка -->
+    <Button Grid.Row="8" Name="GenerateBtn" Content="Сформировать отчёт"
+            HorizontalAlignment="Right" Padding="16,8"
+            Click="Generate_Click"/>
+  </Grid>
+</Window>
