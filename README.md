@@ -39,3 +39,11 @@ dotnet run --project lab4/ParkingApp
 brew services start postgresql@17
 jupyter notebook lab5/lab5.ipynb
 ```
+
+### Лаб 6 — Отчёты (C# + Avalonia)
+Desktop-приложение с генерацией HTML-отчётов: въезды с фильтрацией, машины без допуска, сводка по типам авто.
+
+**Стек:** C# + Avalonia UI + SQLite
+```bash
+dotnet run --project lab6/ParkingReport
+```
